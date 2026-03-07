@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CondoIQ — Phnom Penh Price Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Epilogue:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2" />
+</head>
+<body>
+
+  <!-- ── Sidebar Navigation ─────────────────────────────────── -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-mark">CI</div>
+      <div>
+        <div class="brand-name">CondoIQ</div>
+        <div class="brand-sub">Price Intelligence</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-tab="predict">
+        <span class="nav-icon">◈</span>
+        <span>Predict</span>
+      </button>
+      <button class="nav-item" data-tab="properties">
+        <span class="nav-icon">⊞</span>
+        <span>Properties</span>
+      </button>
+      <button class="nav-item" data-tab="history">
+        <span class="nav-icon">≋</span>
+        <span>History</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-status">
+      <div class="status-row">
+        <span class="status-dot" id="statusDot"></span>
+        <span id="statusText">Connecting...</span>
+      </div>
+      <div class="status-label">FastAPI Backend</div>
+    </div>
+  </aside>
+
+  <!-- ── Main Content ───────────────────────────────────────── -->
+  <main class="main">
+
+    <!-- ════════════════════════════════════════════════════════
+         PANEL 1 — PREDICT
+    ════════════════════════════════════════════════════════ -->
+    <div id="tab-predict" class="panel active">
+
+      <!-- Page header -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Price Prediction</h1>
+          <p class="page-sub">Enter condo details to get an ML-powered rental estimate</p>
+        </div>
+      </div>
+
+      <div class="predict-layout">
+
+        <!-- Input card -->
+        <div class="card">
+          <div class="card-label">INPUT PARAMETERS</div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>Area (m²)</label>
+              <input type="number" id="p-area" value="70" min="10" max="500" />
+            </div>
+            <div class="field">
+              <label>Bedrooms</label>
+              <input type="number" id="p-bedroom" value="2" min="1" max="10" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Khan (District)</label>
+            <select id="p-khan">
+              <option>Chamkar Mon</option>
+              <option>Touk Kork</option>
+              <option>Mean Chey</option>
+              <option>Daun Penh</option>
+              <option>Sen Sok</option>
+              <option>7 Makara</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Sangkat (Commune)</label>
+            <select id="p-sangkat">
+              <option>Tonle Basak</option>
+              <option>Boeng Keng Kang Ti Muoy</option>
+              <option>Boeng Keng Kang Ti Bei</option>
+              <option>Toul Tumpung Ti Muoy</option>
+              <option>Phsar Thmei Ti Bei</option>
+              <option>Boeung Kak Ti Pir</option>
+            </select>
+          </div>
+
+          <button class="btn-predict" id="predictBtn">
+            <span class="btn-predict-text">Run Prediction</span>
+            <span class="btn-arrow">→</span>
+          </button>
+
+          <div class="error-box" id="predictError" style="display:none"></div>
+        </div>
+
+        <!-- Result card -->
+        <div class="result-card" id="resultCard">
+          <div class="result-idle" id="resultIdle">
+            <div class="result-idle-icon">◈</div>
+            <p>Fill in the parameters<br>and run the model</p>
+          </div>
+          <div class="result-data" id="resultData" style="display:none">
+            <div class="result-label-top">ESTIMATED MONTHLY RENT</div>
+            <div class="result-amount" id="resultAmount">—</div>
+            <div class="result-currency">USD / month</div>
+            <div class="result-divider"></div>
+            <div class="result-tags" id="resultTags"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════
+         PANEL 2 — PROPERTIES
+    ════════════════════════════════════════════════════════ -->
+    <div id="tab-properties" class="panel">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Properties</h1>
+          <p class="page-sub" id="propCount">Loading...</p>
+        </div>
+        <button class="btn-add" id="toggleFormBtn">+ Add Property</button>
+      </div>
+
+      <!-- Add form -->
+      <div class="card form-card" id="addForm" style="display:none">
+        <div class="card-label">NEW PROPERTY</div>
+
+        <div class="field">
+          <label>Title</label>
+          <input type="text" id="f-title" placeholder="e.g. Spacious 2BR near BKK1" />
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Area (m²)</label>
+            <input type="number" id="f-area" value="70" />
+          </div>
+          <div class="field">
+            <label>Bedrooms</label>
+            <input type="number" id="f-bedroom" value="2" />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Khan</label>
+            <select id="f-khan">
+              <option>Chamkar Mon</option>
+              <option>Touk Kork</option>
+              <option>Mean Chey</option>
+              <option>Daun Penh</option>
+              <option>Sen Sok</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Sangkat</label>
+            <select id="f-sangkat">
+              <option>Tonle Basak</option>
+              <option>Boeng Keng Kang Ti Muoy</option>
+              <option>Boeng Keng Kang Ti Bei</option>
+              <option>Toul Tumpung Ti Muoy</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Actual Listed Price (USD, optional)</label>
+          <input type="number" id="f-actual" placeholder="e.g. 850" />
+        </div>
+
+        <div class="error-box" id="formError" style="display:none"></div>
+
+        <div class="form-actions">
+          <button class="btn-save" id="saveBtn">Save & Auto-predict</button>
+          <button class="btn-cancel" id="cancelBtn">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Property list -->
+      <div id="propList"></div>
+
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════
+         PANEL 3 — HISTORY
+    ════════════════════════════════════════════════════════ -->
+    <div id="tab-history" class="panel">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Prediction History</h1>
+          <p class="page-sub">All predictions logged to the database</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div id="historyContent">
+          <p class="empty-state">Loading...</p>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

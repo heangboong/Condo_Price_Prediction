@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env/
+
+# Environment variables
+.env
+.env.*
+
+# ML models (large binary files)
+backend/models/*.pkl
+backend/models/*.joblib
+backend/models/*.h5
+backend/models/*.pt
+backend/models/*.pth
+
+# Database
+*.db
+*.sqlite3
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# Logs
+*.log
+logs/
+
+# Coverage / test artifacts
+.coverage
+htmlcov/
+.pytest_cache/
