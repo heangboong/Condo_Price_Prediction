@@ -31,9 +31,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://condopricepredictionfrontend.vercel.app",
-        "http://localhost:5500",
-        "http://127.0.0.1:5500"
+        "https://condopricepredictionfrontend.vercel.app"
     ],
     allow_methods=["*"],
     allow_headers=["*"],
