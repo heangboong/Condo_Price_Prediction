@@ -31,7 +31,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://condo-price-prediction-3nu6.vercel.app",
+        "https://condopricepredictionbackend.vercel.app",
         "http://localhost:5500",
         "http://127.0.0.1:5500"
     ],
