@@ -22,7 +22,7 @@
 /* ============================================================
    1. CONFIG
    ============================================================ */
-const API = 'https://condopricepredictionbackend.vercel.app'
+const API = "https://condopricepredictionbackend.vercel.app"
 
 
 /* ============================================================

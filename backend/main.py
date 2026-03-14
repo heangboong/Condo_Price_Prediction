@@ -31,7 +31,8 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://condopricepredictionfrontend.vercel.app/"
+        "https://condopricepredictionfrontend.vercel.app",
+        "https://condopricepredictionfrontend-25hv42323.vercel.app"
     ],
     allow_methods=["*"],
     allow_headers=["*"],
